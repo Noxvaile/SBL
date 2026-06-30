@@ -231,7 +231,7 @@ function module:win(title)
             inp.Text = default
             
             if default ~= "" then
-                task.defere(cb, default)
+                task.defer(cb, default)
             end
             
             inp.FocusLost:Connect(function(ep)
