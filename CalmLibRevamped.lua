@@ -7,6 +7,7 @@ local ui = cloneref(game:GetService("UserInputService"))
 -- Reference tables for toggles and sliders
 local toggleRefs = {}
 local sliderRefs = {}
+local textboxRefs = {}
 
 function module:win(title)
     local window = game:GetObjects("rbxassetid://96576283085736")[1]
@@ -225,12 +226,21 @@ function module:win(title)
             newtb.Parent = newSect.sectioncontainer
             -- Save ref
             textboxRefs[title] = newtb
+            
             local inp = newtb.frame.inp.lbl
             inp.Text = default
-            if default ~= "" then task.defer(cb, default) end
+            
+            if default ~= "" then
+                task.defere(cb, default)
+            end
+            
             inp.FocusLost:Connect(function(ep)
-                if ep then cb(inp.Text) end
+                if ep then
+                    cb(inp.Text)
+                end
             end)
+
+            return newtb
         end
 
         function contents:slider(title, min, max, default, cb)
